@@ -17,7 +17,7 @@ void add(char *, char *);
 int search(FILE *,char *);
 void list(FILE *);
 int delete(FILE *, char *);
-
+int search(File *,char *);
 /* Utility functions  */
 FILE * open_db_file(); /* Opens the database file. Prints error and
                           quits if it's not available */
@@ -93,7 +93,12 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */
+  /* TBD */  entry *temp;
+  while (p != NULL) {
+    temp = p->next;
+    free(p);
+    p=temp; 
+  }
   printf("Memory is not being freed. This needs to be fixed!\n");  
 }
 
@@ -177,12 +182,12 @@ void add(char *name, char *phone) {
 
 void list(FILE *db_file) {
   entry *p = load_entries(db_file);
-  entry *base = p;
+  entry *base = p; int count=0;
   while (p!=NULL) {
-    printf("%-20s : %10s\n", p->name, p->phone);
+    printf("%-20s : %10s\n", p->name, p->phone); ++count;
     p=p->next;
   }
-  /* TBD print total count */
+  /* TBD print total count */ printf("Total entries : %d\n",count);
   free_entries(base);
 }
 
@@ -201,15 +206,46 @@ int delete(FILE *db_file, char *name) {
              p0 -> p1 -> p2
          
          means we have to make p0->next point directly to p2. The p1
-         "node" is removed and free'd.
+         "node" is removed and free'd. 
          
          If the node to be deleted is p0, it's a special case. 
       */
 
-      /* TBD */
-    }
-  }
+      /* TBD */ prev->next=p->next;
+del=p;
+free(del);
+break;
+
+    } prev=p;
+p=p->next;
+  } if(p==NULL)
+{
+printf("no match\n");
+++deleted;
+}
   write_all_entries(base);
   free_entries(base);
   return deleted;
+}
+
+int search(FILE *db_file, char *name) {
+  entry *p = load_entries(db_file);
+  entry *base = p; 
+  int searched = 0;
+  while (p!=NULL) {
+    if (strcmp(p->name, name) == 0) {
+       break;
+    }
+   p=p->next;   
+  }
+ if(p!=NULL)
+ printf("%s\n",p->phone);
+ else 
+{
+ printf("no match\n");
+ ++searched;
+}
+
+  free_entries(base);
+  return searched;
 }
