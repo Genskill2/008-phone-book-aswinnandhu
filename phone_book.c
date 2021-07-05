@@ -17,7 +17,7 @@ void add(char *, char *);
 int search(FILE *,char *);
 void list(FILE *);
 int delete(FILE *, char *);
-int search(File *,char *);
+int search(FILE *,char *);
 /* Utility functions  */
 FILE * open_db_file(); /* Opens the database file. Prints error and
                           quits if it's not available */
