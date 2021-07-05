@@ -221,7 +221,7 @@ p=p->next;
   } if(p==NULL)
 {
 printf("no match\n");
-++deleted;
+exit(1);
 }
   write_all_entries(base);
   free_entries(base);
@@ -243,7 +243,7 @@ int search(FILE *db_file, char *name) {
  else 
 {
  printf("no match\n");
- ++searched;
+ exit(1);
 }
 
   free_entries(base);
