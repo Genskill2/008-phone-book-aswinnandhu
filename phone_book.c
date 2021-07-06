@@ -189,7 +189,7 @@ void list(FILE *db_file) {
     printf("%-20s : %10s\n", p->name, p->phone); ++count;
     p=p->next;
   }
-  /* TBD print total count */ printf("Total entries : %d\n",count);
+  /* TBD print total count */ printf("Total entries :  %d\n",count);
   free_entries(base);
 }
 
