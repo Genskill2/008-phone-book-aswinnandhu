@@ -17,7 +17,7 @@ void add(char *, char *);
 
 void list(FILE *);
 int delete(FILE *, char *);
-void search(FILE *,char *);
+int search(FILE *,char *);
 /* Utility functions  */
 FILE * open_db_file(); /* Opens the database file. Prints error and
                           quits if it's not available */
@@ -93,12 +93,14 @@ FILE *open_db_file() {
 }
   
 void free_entries(entry *p) {
-  /* TBD */  entry *temp;
+ FILE *fp = fopen(DB, "w");
+  entry *temp;
   while (p != NULL) {
-    temp = p->next;
-    free(p);
-    p=temp; 
+    temp=p;
+    p = p->next;
+    free(temp);
   }
+  fclose(fp);
   printf("Memory is not being freed. This needs to be fixed!\n");  
 }
 
