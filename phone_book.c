@@ -17,7 +17,7 @@ void add(char *, char *);
 int search(FILE *,char *);
 void list(FILE *);
 int delete(FILE *, char *);
-int search(FILE *,char *);
+void search(FILE *,char *);
 /* Utility functions  */
 FILE * open_db_file(); /* Opens the database file. Prints error and
                           quits if it's not available */
@@ -239,10 +239,10 @@ int delete(FILE *db_file, char *name) {
   return deleted;
 }
 
-int search(FILE *db_file, char *name) {
+void search(FILE *db_file, char *name) {
   entry *p = load_entries(db_file);
   entry *base = p; 
-  int searched = 0;
+ 
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
        break;
@@ -258,5 +258,5 @@ int search(FILE *db_file, char *name) {
 }
 
   free_entries(base);
-  exit(0);
+ exit(0);
 }
