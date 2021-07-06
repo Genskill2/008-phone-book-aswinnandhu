@@ -222,6 +222,7 @@ int delete(FILE *db_file, char *name) {
    p = p->next;
 
     }
+    }
     
       if (p == NULL)
       {
