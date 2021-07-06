@@ -241,10 +241,10 @@ int delete(FILE *db_file, char *name) {
   return deleted;
 }
 
-void search(FILE *db_file, char *name) {
+int search(FILE *db_file, char *name) {
   entry *p = load_entries(db_file);
   entry *base = p; 
- 
+ int searched =0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
        break;
@@ -260,5 +260,5 @@ void search(FILE *db_file, char *name) {
 }
 
   free_entries(base);
- exit(0);
+ return searched;
 }
