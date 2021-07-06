@@ -231,7 +231,7 @@ int delete(FILE *db_file, char *name) {
       }
     // Unlink the node from linked list
     prev->next = p->next;
-    del=p
+    del=p;
     free(del); // Free memory
   write_all_entries(base);
   free_entries(base);
