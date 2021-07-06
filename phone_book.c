@@ -14,7 +14,7 @@ typedef struct entry0 entry;
 
 /* Command handlers */
 void add(char *, char *);
-int search(FILE *,char *);
+
 void list(FILE *);
 int delete(FILE *, char *);
 void search(FILE *,char *);
