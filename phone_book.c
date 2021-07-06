@@ -225,7 +225,7 @@ exit(1);
 }
   write_all_entries(base);
   free_entries(base);
-  exit(0);
+  return deleted;
 }
 
 int search(FILE *db_file, char *name) {
