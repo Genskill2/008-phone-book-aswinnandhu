@@ -198,8 +198,15 @@ int delete(FILE *db_file, char *name) {
   entry *prev = NULL;
   entry *del = NULL ; /* Node to be deleted */
   int deleted = 0;
+    if (p != NULL && p->name == name) {
+        del=p;
+        free(del); 
+        write_all_entries(base);
+  free_entries(base);
+  return deleted;
+    }
   while (p!=NULL) {
-    if (strcmp(p->name, name) == 0) {
+    if (strcmp(p->name, name) != 0) {
       /* Matching node found. Delete it from the linked list.
          Deletion from a linked list like this
    
@@ -211,18 +218,21 @@ int delete(FILE *db_file, char *name) {
          If the node to be deleted is p0, it's a special case. 
       */
 
-      /* TBD */ prev->next=p->next;
-del=p;
-free(del);
-break;
+  prev = p;
+   p = p->next;
 
-    } prev=p;
-p=p->next;
-  } if(p==NULL)
-{
-printf("no match\n");
-exit(1);
-}
+    }
+    
+      if (p == NULL)
+      {
+        printf("no match\n");
+          free_entries(base);
+        exit(1);
+      }
+    // Unlink the node from linked list
+    prev->next = p->next;
+    del=p
+    free(del); // Free memory
   write_all_entries(base);
   free_entries(base);
   return deleted;
